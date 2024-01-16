@@ -4,17 +4,20 @@
  */
 package com.mycompany.cakebakerysystem;
 
-/**
- *
- * @author zheig
- */
-abstract class Cake {
+
+// Interface representing a priced item
+interface Priced {
+    double getPrice();
+}
+
+abstract class Cake implements Priced{
     protected String name;
 
     public Cake(String name) {
         this.name = name;
     }
 
+    @Override
     public abstract double getPrice();
     
     
