@@ -16,14 +16,19 @@ public class CakeBakerySystem {
     private static int orderNumberCounter = 1;
     
     public static void main(String[] args) {
-        String bakeryName = JOptionPane.showInputDialog(null, "Name of your Bakery:");
-        
+
+  
         //get next available order number
         int orderNumber = getOrderNumber();
 
         String customerName = JOptionPane.showInputDialog(null, "Enter customer name:");
+        
+        if (customerName == null) {
+            JOptionPane.showMessageDialog(null, "Cancelled Order", "Order Cancelled", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0); // Exit the program
+        }
 
-        CakeOrder order = createCakeOrder(orderNumber, customerName, bakeryName);
+        CakeOrder order = createCakeOrder(orderNumber, customerName);
         
         //display the receipt
         order.printReceipt();
@@ -34,7 +39,7 @@ public class CakeBakerySystem {
         return orderNumberCounter++;
     }
 
-    private static CakeOrder createCakeOrder(int orderNumber, String customerName, String bakeryName) {
+    private static CakeOrder createCakeOrder(int orderNumber, String customerName) {
         // creating a StringBuilder to build the menu message. stringbuilder allows contents of the string to be modified after it's been created
         StringBuilder menuMessage = new StringBuilder("Menu:\n");
         menuMessage.append("Cupcakes:\n");
@@ -71,7 +76,7 @@ public class CakeBakerySystem {
         displayMenu(menuMessage, weddingCakeMenu);
         
         //creates the cakeorder instance
-        CakeOrder order = new CakeOrder(orderNumber, customerName, bakeryName);
+        CakeOrder order = new CakeOrder(orderNumber, customerName);
         
         //it flags the code to continue ordering
         //flagging controls the flow of the code. in this case, it enters a loop to enable the user to continue ordering

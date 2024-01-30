@@ -13,13 +13,11 @@ import java.awt.*;
 public class CakeOrder {
     private int orderNumber;
     private String customerName;
-    private String bakeryName;
     private ArrayList<CakeOrderItem> items;
 
-    public CakeOrder(int orderNumber, String customerName, String bakeryName) {
+    public CakeOrder(int orderNumber, String customerName) {
         this.orderNumber = orderNumber;
         this.customerName = customerName;
-        this.bakeryName = bakeryName;
         this.items = new ArrayList<>();
     }
 
@@ -42,7 +40,12 @@ public class CakeOrder {
         myArea.setBackground(new Color(255, 228, 196)); // set background color to bisque
         myArea.setFont(new Font("Monospaced", Font.PLAIN, 12)); // set font style to monospaced
 
-        myArea.append(bakeryName + " Bakery\nOfficial Receipt\n");
+        if (items.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Cancelled Order", "Order Cancelled", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0); //if user clicked on cancel
+        }
+
+        myArea.append("Yuh Bakery\nOfficial Receipt\n");
         myArea.append("\nOrder Number: " + orderNumber);
         myArea.append("\nCustomer Name: " + customerName + "\n\n");
 
